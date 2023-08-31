@@ -36,6 +36,7 @@
 //     email: "jalereahimlii0909@gmail.com",
 //     images: ["profil.jpg", "cover.jpg"],
 //   });
+
 //   const [inputValue, setInputValue] = useState("");
 
 //   const changeName = () => {
@@ -147,7 +148,10 @@ const App = () => {
     { id: 3, title: "blue jeans", quantity: 1 },
   ]);
 
-  const [selectedProduct, setSelectedProduct] = useState({});
+  // const [selectedProduct, setSelectedProduct] = useState({});
+  const [selectedProductId, setSelectedProductId] = useState();
+
+  const selectedProduct = products.find((p)=> p.id === selectedProductId); 
 
   const increment = (id) => {
     setProducts((prev) => {
@@ -160,8 +164,8 @@ const App = () => {
   };
 
   const handleChoose = (id) => {
-    const product = products.find((p) => p.id === id);
-    setSelectedProduct(product);
+    // const product = products.find((p) => p.id === id);
+    setSelectedProductId(id);
   };
   return (
     <div className="app2">
@@ -181,8 +185,12 @@ const App = () => {
         </div>
       ))}
       <h4>Selected Product</h4>
-      <span>{selectedProduct?.title}</span>
-      <span>{selectedProduct?.quantity}</span>
+
+      {
+        selectedProduct == null ? 'None' : `${selectedProduct.title} -- ${selectedProduct.quantity}`
+      }
+      {/* <span>{selectedProduct?.title}</span>
+      <span>{selectedProduct?.quantity}</span> */}
     </div>
   );
 };
