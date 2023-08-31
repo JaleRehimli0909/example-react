@@ -136,9 +136,8 @@
 
 // export default App;
 
-
 // 4
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import "./App.css";
 
 const App = () => {
@@ -151,7 +150,10 @@ const App = () => {
   // const [selectedProduct, setSelectedProduct] = useState({});
   const [selectedProductId, setSelectedProductId] = useState();
 
-  const selectedProduct = products.find((p)=> p.id === selectedProductId); 
+  const selectedProduct = useMemo(()=>
+    products.find((p) => p.id === selectedProductId),
+    [products, selectedProductId]
+  );
 
   const increment = (id) => {
     setProducts((prev) => {
@@ -186,9 +188,9 @@ const App = () => {
       ))}
       <h4>Selected Product</h4>
 
-      {
-        selectedProduct == null ? 'None' : `${selectedProduct.title} -- ${selectedProduct.quantity}`
-      }
+      {selectedProduct == null
+        ? "None"
+        : `${selectedProduct.title} -- ${selectedProduct.quantity}`}
       {/* <span>{selectedProduct?.title}</span>
       <span>{selectedProduct?.quantity}</span> */}
     </div>
